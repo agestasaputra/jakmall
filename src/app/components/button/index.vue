@@ -1,11 +1,12 @@
 <template>
   <Fragment>
-    <div class="btn-active" v-if="className">
-      <button v-on:click="func">Continue to Payment</button>
+    <div v-bind:class="propsClassName">
+      <button v-on:click="waw">Continue to Payment</button>
     </div>
-    <div class="btn-disabled" v-else>
+    <!-- <div class="btn-disabled" v-else>
       <button v-on:click="func">Continue to Payment</button>
-    </div>
+    </div> -->
+    {{ func }}
   </Fragment>
 </template>
 
@@ -17,26 +18,39 @@ export default {
   props: ["className", "func"],
   components: {
     Fragment
+  },
+  computed: {
+    propsClassName() {
+      return this.className;
+    }
+  },
+  methods: {
+    waw() {
+      this.$store.commit("landing/SET_BUTTON_DELIVERY_DETAILS_HIDE", {
+        deliveryDetails: true,
+        payment: true
+      });
+    }
   }
 };
 </script>
 
 <style scoped>
-.btn-active {
+.active {
   background: orange;
   color: #fff;
   text-align: center;
   height: fit-content;
 }
 
-.btn-disabled {
+.disabled {
   color: #fff;
   text-align: center;
   height: fit-content;
   background: #6b727b;
 }
 
-.btn-active button {
+.active button {
   background: unset;
   color: #fff;
   border: unset;
@@ -46,7 +60,7 @@ export default {
   cursor: pointer;
 }
 
-.btn-disabled button {
+.disabled button {
   background: unset;
   color: #fff;
   border: unset;
@@ -56,7 +70,7 @@ export default {
   cursor: not-allowed;
 }
 
-.btn-disabled button:active {
+.disabled button:active {
   pointer-events: none;
 }
 </style>

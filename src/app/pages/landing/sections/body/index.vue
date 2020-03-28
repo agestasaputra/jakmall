@@ -1,19 +1,19 @@
 <template>
   <div class="body">
-    <BodyLeft />
-    <BodyRight />
+    <app-body-left />
+    <app-body-right />
   </div>
 </template>
 
 <script>
-import BodyLeft from "./sections/body-left";
-import BodyRight from "./sections/body-right";
+import AppBodyLeft from "./sections/body-left";
+import AppBodyRight from "./sections/body-right";
 
 export default {
   name: "app-body",
   components: {
-    BodyLeft,
-    BodyRight
+    AppBodyLeft,
+    AppBodyRight
   }
 };
 </script>
