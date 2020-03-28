@@ -12,7 +12,6 @@
     <div class="card">
       <div class="card-left">
         <h5 class="title">Bank Transfer</h5>
-        <!-- <h5 class="price">9,000</h5> -->
       </div>
       <div class="card-right">
         <i class="fa fa-check" />
@@ -21,7 +20,6 @@
     <div class="card">
       <div class="card-left">
         <h5 class="title">Virtual Account</h5>
-        <!-- <h5 class="price">29,000</h5> -->
       </div>
       <div class="card-right">
         <i class="fa fa-check" />

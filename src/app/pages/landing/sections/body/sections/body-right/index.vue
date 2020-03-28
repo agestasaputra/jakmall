@@ -21,19 +21,11 @@
         v-bind:className="BUTTON_DELIVERY_DETAILS_ACTIVE"
         v-bind:func="BUTTON_DELIVERY_DETAILS_FUNC"
         >Continue to Payment</app-button
-      > -->
-      <div
-        v-if="!summary.buttonHide.deliveryDetails"
-        v-bind:class="BUTTON_DELIVERY_DETAILS_ACTIVE"
-      >
-        <button v-on:click="buttonHandler('delivery-details')">
-          Continue to Payment
-        </button>
+      >-->
+      <div v-if="step === 1" v-bind:class="BUTTON_DELIVERY_DETAILS_ACTIVE">
+        <button v-on:click="buttonHandler('delivery-details')">Continue to Payment</button>
       </div>
-      <div
-        v-else-if="!summary.buttonHide.payment"
-        v-bind:class="BUTTON_PAYMENT_ACTIVE"
-      >
+      <div v-else-if="step === 2" v-bind:class="BUTTON_PAYMENT_ACTIVE">
         <button v-on:click="buttonHandler('payment')">Pay</button>
       </div>
       <div v-else />
@@ -43,15 +35,11 @@
 
 <script>
 import { mapState, mapGetters } from "vuex";
-// import AppButton from "@/app/components/button";
 
 export default {
   name: "app-body-right",
-  components: {
-    // AppButton
-  },
   computed: {
-    ...mapState("landing", ["deliveryDetails", "summary"]),
+    ...mapState("landing", ["deliveryDetails", "summary", "step"]),
     ...mapGetters("landing", [
       "BUTTON_DELIVERY_DETAILS_ACTIVE",
       "BUTTON_DELIVERY_DETAILS_FUNC",
@@ -60,18 +48,22 @@ export default {
   },
   methods: {
     buttonHandler(type) {
-      console.log("cek type:", type);
-      type === "delivery-details" &&
-        this.$store.commit("landing/SET_BUTTON_DELIVERY_DETAILS_HIDE", {
-          deliveryDetails: true,
-          payment: false
-        });
-      type === "payment" &&
-        this.$store.commit("landing/SET_BUTTON_PAYMENT_HIDE", {
-          deliveryDetails: false,
-          payment: true
-        });
-      return;
+      if (type === "delivery-details") {
+        console.log("type: deliveryDetails");
+        localStorage.setItem(
+          "deliveryDetails",
+          JSON.stringify(this.deliveryDetails.form)
+        );
+        this.$store.commit("landing/SET_STEP", 2);
+        return;
+      } else if (type === "payment") {
+        // localStorage.setItem("deliveryDetails", JSON.stringify(deliveryDetails.form) )
+        this.$store.commit("landing/SET_STEP", 3);
+        return;
+      } else {
+        console.log("buttonHandler is not valid!", type);
+        return null;
+      }
     }
   }
 };

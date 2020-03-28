@@ -1,6 +1,7 @@
 const landing = {
   namespaced: true,
   state: {
+    step: 2,
     deliveryDetails: {
       form: {
         email: "",
@@ -10,7 +11,27 @@ const landing = {
         address: ""
       }
     },
-    shipment: "",
+    shipmentValue: "",
+    shipments: [
+      {
+        id: 0,
+        name: "GO-SEND",
+        price: 15000,
+        selected: false
+      },
+      {
+        id: 1,
+        name: "JNE",
+        price: 9000,
+        selected: false
+      },
+      {
+        id: 2,
+        name: "Personal Courier",
+        price: 15000,
+        selected: false
+      }
+    ],
     paymentMethod: "",
     summary: {
       itemPurchased: 10,
@@ -24,14 +45,16 @@ const landing = {
       buttonActive: {
         deliveryDetails: false,
         payment: false
-      },
-      buttonHide: {
-        deliveryDetails: false,
-        payment: true
       }
     }
   },
   getters: {
+    SELECTED_PAYMENT: state => {
+      let tmp = state.shipments.filter(item => item.selected);
+      console.log("cek tmp on SELECTED_PAYMENT", tmp);
+
+      return;
+    },
     BUTTON_DELIVERY_DETAILS_ACTIVE: state => {
       if (
         state.deliveryDetails.form.email &&
@@ -46,7 +69,7 @@ const landing = {
       }
     },
     BUTTON_PAYMENT_ACTIVE: state => {
-      if (state.shipment && state.paymentMethod) {
+      if (state.paymentMethod) {
         return "active";
       } else {
         return "disabled";
@@ -69,25 +92,24 @@ const landing = {
     SET_ADDRESS(state, payload) {
       state.deliveryDetails.form.address = payload;
     },
-    SET_BUTTON_DELIVERY_DETAILS_HIDE(state, payload) {
-      state.deliveryDetails.form = {
-        email: "",
-        dropshipperName: "",
-        phone: "",
-        dropshipperPhone: "",
-        address: ""
-      };
-      state.summary.buttonHide = payload;
+    SET_STEP(state, payload) {
+      state.step = payload;
     },
-    SET_BUTTON_PAYMENT_HIDE(state, payload) {
-      state.deliveryDetails.form = {
-        email: "",
-        dropshipperName: "",
-        phone: "",
-        dropshipperPhone: "",
-        address: ""
-      };
-      state.summary.buttonHide = payload;
+    SET_SHIPMENT(state, payload) {
+      // const tmp = state.shipments.filter(item => item.id !== payload);
+      // tmp.map(item => !item.selected);
+      // tmp.push({
+      //   ...state.shipments[payload],
+      //   selected: true
+      // });
+      // console.log("cek tmp:", tmp);
+      // Object.assign(state.shipments, tmp);
+
+      // Object.assign(state.shipments[payload], {
+      //   ...state.shipments[payload],
+      //   selected: true
+      // });
+      state.shipmentValue = payload;
     }
   },
   actions: {}

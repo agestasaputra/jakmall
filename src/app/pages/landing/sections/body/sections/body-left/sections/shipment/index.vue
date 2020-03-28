@@ -1,32 +1,21 @@
 <template>
   <Fragment>
-    <div class="card">
-      <div class="card-left">
-        <h5 class="title">GOSEND</h5>
-        <h5 class="price">15,000</h5>
+    <Fragment v-for="item in shipments" v-bind:key="item.id">
+      <div
+        class="card"
+        v-on:click="cardHandler(item.id)"
+        v-bind:class="{active : shipmentValue === item.id}"
+      >
+        <div class="card-left">
+          <h5 class="title">{{item.name}}</h5>
+          <h5 class="price">{{item.price}}</h5>
+          <h5 class="price">{{item.selected}}</h5>
+        </div>
+        <div class="card-right" v-if="shipmentValue === item.id">
+          <i class="fa fa-check" />
+        </div>
       </div>
-      <div class="card-right">
-        <i class="fa fa-check" />
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-left">
-        <h5 class="title">JNE</h5>
-        <h5 class="price">9,000</h5>
-      </div>
-      <div class="card-right">
-        <i class="fa fa-check" />
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-left">
-        <h5 class="title">GOSEND</h5>
-        <h5 class="price">29,000</h5>
-      </div>
-      <div class="card-right">
-        <i class="fa fa-check" />
-      </div>
-    </div>
+    </Fragment>
   </Fragment>
 </template>
 
@@ -40,8 +29,25 @@ export default {
     Fragment
   },
   computed: {
-    ...mapState("landing", ["deliveryDetails"]),
+    ...mapState("landing", ["deliveryDetails", "shipments", "shipmentValue"]),
     ...mapState("about", ["dataAbout"])
+  },
+  methods: {
+    cardHandler(type) {
+      console.log("cek type:", type);
+      localStorage.setItem("shipment", type);
+      this.$store.commit("landing/SET_SHIPMENT", type);
+      return;
+    }
+  },
+  created() {
+    if (localStorage.getItem("shipment")) {
+      // const localShipment = localStorage.getItem("shipment");
+
+      return;
+    } else {
+      return null;
+    }
   }
 };
 </script>
@@ -52,6 +58,11 @@ export default {
   flex-flow: row nowrap;
   padding: 10px;
   border: 1px solid rgb(232, 233, 233);
+  cursor: pointer;
+}
+
+.active {
+  border: 1px solid #3c763d;
 }
 
 .title {

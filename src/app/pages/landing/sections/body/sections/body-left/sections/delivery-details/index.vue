@@ -56,6 +56,26 @@ export default {
   components: {
     Fragment
   },
+  created() {
+    if (localStorage.getItem("deliveryDetails")) {
+      console.log("masuk localStorage");
+      const tmp = JSON.parse(localStorage.getItem("deliveryDetails"));
+      this.oldTmp = tmp;
+      this.email = tmp.email;
+      this.dropshipperName = tmp.dropshipperName;
+      this.phone = tmp.phone;
+      this.dropshipperPhone = tmp.dropshipperPhone;
+      this.address = tmp.address;
+      return;
+    } else if (localStorage.getItem("shipment")) {
+      // const tmp = JSON.parse(localStorage.getItem("shipment"));
+      console.log("ga masuk localStorage");
+      return;
+    } else {
+      console.log("ga masuk localStorage");
+      return;
+    }
+  },
   methods: {
     emailValidation() {
       // eslint-disable-next-line
