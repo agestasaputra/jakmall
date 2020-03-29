@@ -1,36 +1,27 @@
 <template>
   <Fragment>
-    <div class="card">
-      <div class="card-left">
-        <h5 class="title">e-Wallet</h5>
-        <h5 class="price">1,500,000 left</h5>
+    <Fragment v-for="item in payments" v-bind:key="item.id">
+      <div
+        class="card"
+        v-on:click="cardHandler(item)"
+        v-bind:class="{active : paymentMethod === item.id}"
+      >
+        <div class="card-left">
+          <h5 class="title">{{item.name}}</h5>
+          <h5 class="price" v-if="paymentMethod === item.id">{{item.balance}} left</h5>
+        </div>
+        <div class="card-right" v-if="paymentMethod === item.id">
+          <i class="fa fa-check" />
+        </div>
       </div>
-      <div class="card-right">
-        <i class="fa fa-check" />
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-left">
-        <h5 class="title">Bank Transfer</h5>
-      </div>
-      <div class="card-right">
-        <i class="fa fa-check" />
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-left">
-        <h5 class="title">Virtual Account</h5>
-      </div>
-      <div class="card-right">
-        <i class="fa fa-check" />
-      </div>
-    </div>
+    </Fragment>
   </Fragment>
 </template>
 
 <script>
 import { Fragment } from "vue-fragment";
 import { mapState } from "vuex";
+import { EventBus } from "@/event-bus";
 
 export default {
   name: "app-payment",
@@ -38,8 +29,20 @@ export default {
     Fragment
   },
   computed: {
-    ...mapState("landing", ["deliveryDetails"]),
+    ...mapState("landing", ["deliveryDetails", "payments", "paymentMethod"]),
     ...mapState("about", ["dataAbout"])
+  },
+  methods: {
+    cardHandler(item) {
+      EventBus.$emit("summary-payment", item);
+    }
+    // cardHandler(item) {
+    //   this.$store.commit("landing/SET_PAYMENT_METHOD", {
+    //     id: item.id,
+    //     balance: item.balance
+    //   });
+    //   return;
+    // }
   }
 };
 </script>
@@ -50,6 +53,15 @@ export default {
   flex-flow: row nowrap;
   padding: 10px;
   border: 1px solid rgb(232, 233, 233);
+  cursor: pointer;
+}
+.card:hover {
+  /* border: 1px solid rgb(226, 133, 11); */
+  border: 1px solid #3c763d;
+}
+
+.active {
+  border: 1px solid #3c763d;
 }
 
 .title {

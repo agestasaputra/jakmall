@@ -59,6 +59,7 @@ export default {
   created() {
     if (localStorage.getItem("deliveryDetails")) {
       console.log("masuk localStorage");
+      this.$store.commit("landing/SET_PRODUCT_FEE");
       const tmp = JSON.parse(localStorage.getItem("deliveryDetails"));
       this.oldTmp = tmp;
       this.email = tmp.email;
@@ -70,9 +71,11 @@ export default {
     } else if (localStorage.getItem("shipment")) {
       // const tmp = JSON.parse(localStorage.getItem("shipment"));
       console.log("ga masuk localStorage");
+      this.$store.commit("landing/SET_PRODUCT_FEE");
       return;
     } else {
       console.log("ga masuk localStorage");
+      this.$store.commit("landing/SET_PRODUCT_FEE");
       return;
     }
   },

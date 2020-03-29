@@ -1,7 +1,13 @@
 const landing = {
   namespaced: true,
   state: {
-    step: 2,
+    currentStep: 1,
+    productFee: 5000000,
+    dropshipper: false,
+    dropshipperFee: 0,
+    shipmentFee: 0,
+    paymentFee: 0,
+    totalPrice: 0,
     deliveryDetails: {
       form: {
         email: "",
@@ -11,50 +17,44 @@ const landing = {
         address: ""
       }
     },
-    shipmentValue: "",
+    shipmentMethod: null,
     shipments: [
       {
         id: 0,
         name: "GO-SEND",
-        price: 15000,
-        selected: false
+        price: 15000
       },
       {
         id: 1,
         name: "JNE",
-        price: 9000,
-        selected: false
+        price: 9000
       },
       {
         id: 2,
         name: "Personal Courier",
-        price: 15000,
-        selected: false
+        price: 15000
       }
     ],
-    paymentMethod: "",
-    summary: {
-      itemPurchased: 10,
-      costOfGoods: 0,
-      dropshippingFee: 0,
-      deliveryFee: 0,
-      total: 0,
-      deliveryEstimation: "6 hours",
-      deliveryProvider: "6 SiCepat",
-      paymentMethod: "Ovo",
-      buttonActive: {
-        deliveryDetails: false,
-        payment: false
+    paymentMethod: null,
+    payments: [
+      {
+        id: 0,
+        name: "e-Wallet",
+        balance: 1500000
+      },
+      {
+        id: 1,
+        name: "Bank Transfer",
+        balance: 500000
+      },
+      {
+        id: 2,
+        name: "Virtual Account",
+        balance: 1000000
       }
-    }
+    ]
   },
   getters: {
-    SELECTED_PAYMENT: state => {
-      let tmp = state.shipments.filter(item => item.selected);
-      console.log("cek tmp on SELECTED_PAYMENT", tmp);
-
-      return;
-    },
     BUTTON_DELIVERY_DETAILS_ACTIVE: state => {
       if (
         state.deliveryDetails.form.email &&
@@ -69,10 +69,10 @@ const landing = {
       }
     },
     BUTTON_PAYMENT_ACTIVE: state => {
-      if (state.paymentMethod) {
-        return "active";
-      } else {
+      if (state.paymentMethod === null || state.shipmentMethod === null) {
         return "disabled";
+      } else {
+        return "active";
       }
     }
   },
@@ -92,24 +92,76 @@ const landing = {
     SET_ADDRESS(state, payload) {
       state.deliveryDetails.form.address = payload;
     },
-    SET_STEP(state, payload) {
-      state.step = payload;
+    SET_CURRENT_STEP(state, payload) {
+      state.currentStep = payload;
     },
-    SET_SHIPMENT(state, payload) {
-      // const tmp = state.shipments.filter(item => item.id !== payload);
-      // tmp.map(item => !item.selected);
-      // tmp.push({
-      //   ...state.shipments[payload],
-      //   selected: true
-      // });
-      // console.log("cek tmp:", tmp);
-      // Object.assign(state.shipments, tmp);
-
-      // Object.assign(state.shipments[payload], {
-      //   ...state.shipments[payload],
-      //   selected: true
-      // });
-      state.shipmentValue = payload;
+    RESET_ALL(state) {
+      state.paymentMethod = null;
+      state.paymentFee = 0;
+      state.shipmentMethod = null;
+      state.shipmentFee = 0;
+      state.dropshipper = false;
+      // state.currentStep = 1;
+    },
+    SET_SHIPMENT_METHOD(state, payload) {
+      if (state.shipmentMethod !== payload.id) {
+        state.shipmentFee = 0;
+        state.shipmentMethod = payload.id;
+        state.shipmentFee = state.shipmentFee + payload.price;
+        state.totalPrice =
+          state.productFee +
+          state.shipmentFee +
+          state.paymentFee +
+          state.dropshipperFee;
+        return;
+      } else {
+        return;
+      }
+    },
+    SET_PAYMENT_METHOD(state, payload) {
+      if (state.paymentMethod !== payload.id) {
+        state.paymentFee = 0;
+        state.paymentMethod = payload.id;
+        state.paymentFee = state.paymentFee + payload.balance;
+        state.totalPrice =
+          state.productFee +
+          state.paymentFee +
+          state.shipmentFee +
+          state.dropshipperFee;
+        return;
+      } else {
+        return;
+      }
+    },
+    SET_PRODUCT_FEE(state) {
+      state.totalPrice =
+        state.productFee +
+        state.paymentFee +
+        state.shipmentFee +
+        state.dropshipperFee;
+      return;
+    },
+    SET_DROPSHIPPER(state, payload) {
+      if (payload) {
+        state.dropshipperFee = 0;
+        state.dropshipperFee = 9000;
+        state.dropshipper = payload;
+        state.totalPrice =
+          state.dropshipperFee +
+          state.productFee +
+          state.paymentFee +
+          state.shipmentFee;
+        return;
+      } else {
+        state.dropshipperFee = 0;
+        state.dropshipper = payload;
+        state.totalPrice =
+          state.dropshipperFee +
+          state.productFee +
+          state.paymentFee +
+          state.shipmentFee;
+        return;
+      }
     }
   },
   actions: {}

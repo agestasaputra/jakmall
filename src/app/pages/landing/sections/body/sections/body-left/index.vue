@@ -1,17 +1,17 @@
 <template>
   <div class="section-left">
     <div class="section-left-header">
-      <h3 v-if="step === 1">Delivery details</h3>
-      <h3 v-else-if="step === 2">Shipment</h3>
-      <div v-if="step === 1" class="section-checkbox">
-        <input type="checkbox" />
+      <h3 v-if="currentStep === 1">Delivery details</h3>
+      <h3 v-else-if="currentStep === 2">Shipment</h3>
+      <div v-if="currentStep === 1" class="section-checkbox">
+        <input type="checkbox" v-model="dropshipper" v-on:change="dropshipperValidation" />
         <p class="text">Send as dropshipper</p>
       </div>
     </div>
-    <div v-if="step === 1" class="container-delivery-details">
+    <div v-if="currentStep === 1" class="container-delivery-details">
       <app-delivery-details />
     </div>
-    <Fragment v-else-if="step === 2">
+    <Fragment v-else-if="currentStep === 2">
       <div class="container-shipment">
         <app-shipment />
       </div>
@@ -20,6 +20,9 @@
         <app-payment />
       </div>
     </Fragment>
+    <div v-if="currentStep === 3" class="container-thank-you">
+      <app-thank-you />
+    </div>
     <div v-else />
   </div>
 </template>
@@ -28,19 +31,32 @@
 import AppDeliveryDetails from "./sections/delivery-details";
 import AppShipment from "./sections/shipment";
 import AppPayment from "./sections/payment";
+import AppThankYou from "./sections/thank-you";
 import { mapState } from "vuex";
 import { Fragment } from "vue-fragment";
 
 export default {
   name: "app-body-left",
+  data() {
+    return {
+      dropshipper: false
+    };
+  },
   components: {
     AppDeliveryDetails,
     AppShipment,
     AppPayment,
+    AppThankYou,
     Fragment
   },
   computed: {
-    ...mapState("landing", ["deliveryDetails", "summary", "step"])
+    ...mapState("landing", ["deliveryDetails", "summary", "currentStep"])
+  },
+  methods: {
+    dropshipperValidation() {
+      this.$store.commit("landing/SET_DROPSHIPPER", this.dropshipper);
+      // this.$store.commit("landing/SET_DROPSHIPPER_FEE", this.dropshipper);
+    }
   }
 };
 </script>
@@ -74,5 +90,13 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-gap: 10px;
+}
+.container-thank-you {
+  width: fit-content;
+  height: 100%;
+  margin: -1% auto auto auto;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
 }
 </style>

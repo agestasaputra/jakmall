@@ -1,7 +1,7 @@
 <template>
-  <div class="header">
-    <i class="fa fa-arrow-left" v-on:click="buttonBackHandler" />
-    {{newWord}}
+  <div class="header" v-if="currentStep < 3">
+    <i class="fa fa-arrow-left" />
+    <p v-on:click="buttonBackHandler" class="arrow-desc">{{newWord}}</p>
   </div>
 </template>
 
@@ -16,21 +16,21 @@ export default {
     };
   },
   computed: {
-    ...mapState("landing", ["step"]),
+    ...mapState("landing", ["currentStep"]),
     newWord() {
-      return this.step === 1
+      return this.currentStep === 1
         ? "Back to cart"
-        : this.step === 2 && "Back to delivery";
+        : this.currentStep === 2 && "Back to delivery";
     }
   },
   methods: {
     buttonBackHandler() {
-      this.step === 1
+      this.currentStep === 1
         ? console.log("step 3 is done!")
-        : this.step === 2
-        ? this.$store.commit("landing/SET_STEP", 1)
-        : this.step === 3
-        ? this.$store.commit("landing/SET_STEP", 2)
+        : this.currentStep === 2
+        ? this.$store.commit("landing/SET_CURRENT_STEP", 1)
+        : this.currentStep === 3
+        ? this.$store.commit("landing/SET_CURRENT_STEP", 2)
         : console.log("step 3 is done!");
     }
   }
@@ -43,7 +43,15 @@ export default {
   padding: 0px;
 }
 .fa-arrow-left {
-  cursor: pointer;
   margin-right: 5px;
+}
+.arrow-desc {
+  cursor: pointer;
+  display: inline-block;
+  margin: 0px;
+}
+.arrow-desc:hover {
+  text-decoration: underline;
+  color: red;
 }
 </style>

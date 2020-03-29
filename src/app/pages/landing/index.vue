@@ -12,9 +12,6 @@ import AppBody from "./sections/body";
 
 export default {
   name: "landing",
-  created: function() {
-    console.log("landing created!");
-  },
   components: {
     AppHeader,
     AppBody

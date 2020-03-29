@@ -1,12 +1,5 @@
 <template>
   <div class="container-input-text">
-    <!-- <input type="text" v-model.trim="$v.data.$model" @input="setData" placeholder="name" /> -->
-    <!-- <Fragment v-if="$v.data.required && $v.data.minLength ">
-      <i class="fa fa-check" />
-    </Fragment>
-    <Fragment v-if="$v.data.$dirty && !$v.data.minLength">
-      <i class="fa fa-times" />
-    </Fragment>-->
     <input type="text" v-on:input="setData" placeholder="name" />
     <Fragment>
       <i class="fa fa-check" />
@@ -23,15 +16,7 @@ export default {
   components: {
     Fragment
   },
-  methods: {
-    // setData(event) {
-    //   console.log("cek event:", e);
-    // }
-  },
-  props: ["dataProps"],
-  created() {
-    console.log("cek state on input-text:", this.dataProps);
-  }
+  props: ["dataProps"]
 };
 </script>
 
