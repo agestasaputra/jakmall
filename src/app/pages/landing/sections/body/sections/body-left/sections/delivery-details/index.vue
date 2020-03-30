@@ -288,6 +288,24 @@ textarea {
   color: red;
 }
 
+@media screen and (max-width: 768px) {
+  .container-input {
+    display: inline-block;
+    height: 5vw;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  textarea {
+    resize: none;
+    height: 20vw;
+    flex: 1;
+    padding: 10px;
+    margin: 0px;
+    border: unset;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .container-input {
     display: inline-block;
@@ -298,7 +316,7 @@ textarea {
 
   textarea {
     resize: none;
-    height: 35vw;
+    height: 20vw;
     flex: 1;
     padding: 10px;
     margin: 0px;

@@ -131,6 +131,27 @@ h5 {
   color: #fff;
 }
 
+@media screen and (max-width: 768px) {
+  .container-navigation {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -125%);
+    display: flex;
+    flex-flow: row nowrap;
+    width: fit-content;
+    padding: 10px;
+    background: #ffebce;
+    border-radius: 4em;
+  }
+
+  .navigation-1 {
+    margin-left: 2px;
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .container-navigation {
     position: absolute;

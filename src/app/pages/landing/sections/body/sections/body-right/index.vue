@@ -145,17 +145,6 @@ hr {
   flex-flow: column nowrap;
 }
 
-@media screen and (max-width: 480px) {
-  .section-right {
-    margin-top: 30px;
-    width: auto;
-    padding: 0px;
-    border: unset;
-    display: flex;
-    flex-flow: column nowrap;
-  }
-}
-
 .section-right-header {
   text-align: left;
 }
@@ -241,5 +230,34 @@ hr {
 
 h2 {
   color: orange;
+}
+
+@media screen and (max-width: 768px) {
+  .section-right {
+    width: 25%;
+    padding-left: 25px;
+    border-left: 1px solid black;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+
+  .section-total,
+  .section-desc {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    margin: 15px 0px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .section-right {
+    margin-top: 30px;
+    width: auto;
+    padding: 0px;
+    border: unset;
+    display: flex;
+    flex-flow: column nowrap;
+  }
 }
 </style>

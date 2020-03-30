@@ -110,6 +110,15 @@ h2 {
   color: orange;
 }
 
+@media screen and (max-width: 768px) {
+  .container-delivery-details {
+    display: grid;
+    grid-template-columns: 1fr 0.8fr;
+    grid-column-gap: 20px;
+    grid-row-gap: 10px;
+  }
+}
+
 @media screen and (max-width: 480px) {
   .container-delivery-details {
     display: grid;
