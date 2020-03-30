@@ -57,9 +57,6 @@ export default {
   transform: translate(-50%, -100%);
   display: flex;
   flex-flow: row nowrap;
-  /* justify-content: space-around;
-  align-items: flex-end; */
-  /* width: fit-content; */
   width: 30%;
   padding: 10px;
   background: #ffebce;
@@ -111,8 +108,6 @@ export default {
 
 .step {
   display: inline-block;
-  /* margin: 0px 50px;
-  padding: 50px; */
   background: #f4cc9a;
   color: orange;
   border-radius: 50%;
@@ -134,5 +129,48 @@ h5 {
 .active {
   background: orange;
   color: #fff;
+}
+
+@media screen and (max-width: 480px) {
+  .container-navigation {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -125%);
+    display: flex;
+    flex-flow: row nowrap;
+    width: fit-content;
+    padding: 10px;
+    background: #ffebce;
+    border-radius: 4em;
+  }
+
+  .navigation-1 {
+    margin-left: 4px;
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  .step {
+    display: inline-block;
+    background: #f4cc9a;
+    color: orange;
+    border-radius: 50%;
+    width: fit-content;
+    height: fit-content;
+    padding: 0px 6px;
+  }
+
+  p {
+    font-size: 11px;
+  }
+
+  h5 {
+    font-size: 11px;
+  }
+
+  .fa-chevron-right {
+    font-size: 11px;
+  }
 }
 </style>

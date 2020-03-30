@@ -241,6 +241,7 @@ export default {
   display: flex;
   flex-flow: row nowrap;
 }
+
 .container-input-textarea {
   display: inline-block;
   border: 1px solid rgb(232, 233, 233);
@@ -285,5 +286,23 @@ textarea {
 
 .fa-times {
   color: red;
+}
+
+@media screen and (max-width: 480px) {
+  .container-input {
+    display: inline-block;
+    height: 8vw;
+    display: flex;
+    flex-flow: row nowrap;
+  }
+
+  textarea {
+    resize: none;
+    height: 35vw;
+    flex: 1;
+    padding: 10px;
+    margin: 0px;
+    border: unset;
+  }
 }
 </style>

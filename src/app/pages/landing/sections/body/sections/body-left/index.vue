@@ -109,4 +109,30 @@ export default {
 h2 {
   color: orange;
 }
+
+@media screen and (max-width: 480px) {
+  .container-delivery-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 10px;
+  }
+
+  .section-left {
+    flex: 1;
+    padding-right: 0px;
+    text-align: left;
+  }
+
+  .section-left .section-left-header {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+  }
+
+  .section-left .section-left-header .section-checkbox {
+    margin-top: -15px;
+    margin-bottom: 15px;
+  }
+}
 </style>

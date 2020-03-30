@@ -104,4 +104,11 @@ export default {
   display: flex;
   flex-flow: row nowrap;
 }
+
+@media screen and (max-width: 480px) {
+  .body {
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
 </style>

@@ -145,6 +145,17 @@ hr {
   flex-flow: column nowrap;
 }
 
+@media screen and (max-width: 480px) {
+  .section-right {
+    margin-top: 30px;
+    width: auto;
+    padding: 0px;
+    border: unset;
+    display: flex;
+    flex-flow: column nowrap;
+  }
+}
+
 .section-right-header {
   text-align: left;
 }

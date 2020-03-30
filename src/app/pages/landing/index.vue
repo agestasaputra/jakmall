@@ -33,4 +33,13 @@ export default {
   background: #fff;
   border-radius: 0.5em;
 }
+
+@media screen and (max-width: 480px) {
+  .container-landing {
+    margin: 25px 30px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 0.5em;
+  }
+}
 </style>
