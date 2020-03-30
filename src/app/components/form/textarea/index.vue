@@ -27,4 +27,8 @@ export default {
   width: -webkit-fill-available;
   resize: none;
 }
+
+.fa-check {
+  color: #77ef83;
+}
 </style>

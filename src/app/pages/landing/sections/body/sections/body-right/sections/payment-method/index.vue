@@ -30,6 +30,10 @@ export default {
 </script>
 
 <style>
+h4 {
+  color: #77ef83;
+}
+
 h4,
 p {
   margin: 0px;

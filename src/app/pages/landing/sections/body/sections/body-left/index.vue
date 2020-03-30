@@ -1,8 +1,8 @@
 <template>
   <div class="section-left">
     <div class="section-left-header">
-      <h3 v-if="currentStep === 1">Delivery details</h3>
-      <h3 v-else-if="currentStep === 2">Shipment</h3>
+      <h2 v-if="currentStep === 1">Delivery details</h2>
+      <h2 v-else-if="currentStep === 2">Shipment</h2>
       <div v-if="currentStep === 1" class="section-checkbox">
         <input type="checkbox" v-model="dropshipper" v-on:change="dropshipperValidation" />
         <p class="text">Send as dropshipper</p>
@@ -15,7 +15,7 @@
       <div class="container-shipment">
         <app-shipment />
       </div>
-      <h3>Payment</h3>
+      <h2>Payment</h2>
       <div class="container-payment">
         <app-payment />
       </div>
@@ -74,7 +74,13 @@ export default {
   justify-content: space-between;
 }
 
+.section-left .section-left-header .section-checkbox {
+  display: flex;
+  align-items: center;
+}
+
 .section-left .section-left-header .section-checkbox .text {
+  margin-left: 5px;
   display: inline-block;
 }
 
@@ -98,5 +104,9 @@ export default {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
+}
+
+h2 {
+  color: orange;
 }
 </style>

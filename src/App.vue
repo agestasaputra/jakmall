@@ -18,7 +18,7 @@ export default {
 body {
   margin: 0px;
   padding: 0px;
-  background: #f9d190;
+  background: #ffebce;
 }
 
 #app {

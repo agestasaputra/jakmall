@@ -1,11 +1,13 @@
 <template>
   <div class="container-landing">
+    <app-navigation />
     <app-header />
     <app-body />
   </div>
 </template>
 
 <script>
+import AppNavigation from "./sections/navigation";
 import AppHeader from "./sections/header";
 import AppBody from "./sections/body";
 // import { required, minLength, between } from "vuelidate/lib/validators";
@@ -14,7 +16,8 @@ export default {
   name: "landing",
   components: {
     AppHeader,
-    AppBody
+    AppBody,
+    AppNavigation
   },
   data() {
     return {};

@@ -27,13 +27,6 @@ export default {
   methods: {
     buttonBackHandler() {
       EventBus.$emit("buttonBackHandler");
-      // this.currentStep === 1
-      //   ? console.log("step 3 is done!")
-      //   : this.currentStep === 2
-      //   ? this.$store.commit("landing/SET_CURRENT_STEP", 1)
-      //   : this.currentStep === 3
-      //   ? this.$store.commit("landing/SET_CURRENT_STEP", 2)
-      //   : console.log("step 3 is done!");
       return;
     }
   }

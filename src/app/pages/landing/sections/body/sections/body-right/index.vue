@@ -6,8 +6,6 @@
     </div>
     <hr />
     <div class="section-right-body">
-      <!-- <app-delivery-estimation v-if="shipmentMethod !== null" />
-      <app-payment-method v-if="paymentMethod !== null" />-->
       <app-delivery-estimation v-if="shipmentFlag" />
       <app-payment-method v-if="paymentFlag" />
     </div>
@@ -38,14 +36,6 @@
           v-on:click="buttonFlagHandler('payment')"
         >Pay {{paymentMethod !== null ? "with " + paymentMethodName() : null}}</button>
       </div>
-      <!-- <div v-show="currentStep === 1" v-bind:class="BUTTON_DELIVERY_DETAILS_ACTIVE">
-        <button v-on:click="buttonHandler('delivery-details')">Continue to Payment</button>
-      </div>
-      <div v-show="currentStep === 2" v-bind:class="BUTTON_PAYMENT_ACTIVE">
-        <button
-          v-on:click="buttonHandler('payment')"
-        >Pay {{paymentMethod !== null ? "with " + paymentMethodName() : null}}</button>
-      </div>-->
     </div>
   </div>
 </template>
@@ -236,5 +226,9 @@ hr {
 .text {
   font-weight: unset;
   margin-bottom: 10px;
+}
+
+h2 {
+  color: orange;
 }
 </style>

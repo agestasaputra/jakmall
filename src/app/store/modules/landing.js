@@ -1,6 +1,20 @@
 const landing = {
   namespaced: true,
   state: {
+    steps: [
+      {
+        id: 0,
+        name: 1
+      },
+      {
+        id: 1,
+        name: 2
+      },
+      {
+        id: 2,
+        name: 3
+      }
+    ],
     currentStep: 1,
     productFee: 5000000,
     dropshipper: false,

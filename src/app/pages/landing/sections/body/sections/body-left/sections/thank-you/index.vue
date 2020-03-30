@@ -69,6 +69,7 @@ p {
 }
 
 .text-navigation-desc {
+  color: #2c3e50;
   margin-left: 10px;
   display: inline-block;
   cursor: pointer;
@@ -77,5 +78,9 @@ p {
 .text-navigation-desc:hover {
   text-decoration: underline;
   color: red;
+}
+
+h1 {
+  color: orange;
 }
 </style>

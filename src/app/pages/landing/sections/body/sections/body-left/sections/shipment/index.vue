@@ -36,13 +36,6 @@ export default {
     cardHandler(item) {
       EventBus.$emit("summary-shipment", item);
     }
-    // cardHandler(item) {
-    //   this.$store.commit("landing/SET_SHIPMENT_METHOD", {
-    //     id: item.id,
-    //     price: item.price
-    //   });
-    //   return;
-    // }
   }
 };
 </script>
@@ -57,11 +50,11 @@ export default {
 }
 .card:hover {
   /* border: 1px solid rgb(226, 133, 11); */
-  border: 1px solid #3c763d;
+  border: 2px solid #77ef83;
 }
 
 .active {
-  border: 1px solid #3c763d;
+  border: 2px solid #77ef83;
 }
 
 .title {
@@ -81,5 +74,9 @@ export default {
   margin: 0px 5px;
   display: flex;
   align-items: center;
+}
+
+.fa-check {
+  color: #77ef83;
 }
 </style>

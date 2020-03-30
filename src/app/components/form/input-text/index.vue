@@ -34,4 +34,8 @@ export default {
   border: unset;
   width: -webkit-fill-available;
 }
+
+.fa-check {
+  color: #77ef83;
+}
 </style>
