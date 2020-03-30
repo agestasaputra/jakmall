@@ -22,16 +22,19 @@ const landing = {
       {
         id: 0,
         name: "GO-SEND",
+        time: "today",
         price: 15000
       },
       {
         id: 1,
         name: "JNE",
+        time: "2 days",
         price: 9000
       },
       {
         id: 2,
         name: "Personal Courier",
+        time: "1 day",
         price: 15000
       }
     ],

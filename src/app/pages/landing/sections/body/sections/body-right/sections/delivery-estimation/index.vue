@@ -1,7 +1,7 @@
 <template>
   <Fragment>
     <p>Delivery estimation</p>
-    <h4>today by {{shipmentMethod !== null ? shipmentMethodName() : null}}</h4>
+    <h4>{{shipmentTimeMethod()}} by {{shipmentMethod !== null ? shipmentNameMethod() : null}}</h4>
     <hr v-show="shipmentMethod !== null ? true : false" />
   </Fragment>
 </template>
@@ -19,11 +19,11 @@ export default {
     ...mapState("landing", ["paymentMethod", "shipmentMethod", "shipments"])
   },
   methods: {
-    shipmentMethodName() {
-      return this.shipments[this.shipmentMethod].name;
+    shipmentTimeMethod() {
+      return this.shipments[this.shipmentMethod].time;
     },
-    shipmentMethodPrice() {
-      return this.shipments[this.shipmentMethod].price;
+    shipmentNameMethod() {
+      return this.shipments[this.shipmentMethod].name;
     }
   }
 };

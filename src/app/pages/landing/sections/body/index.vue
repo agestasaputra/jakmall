@@ -27,18 +27,26 @@ export default {
   },
   created() {
     EventBus.$on("buttonBackHandler", () => {
-      console.log("buttonBackHandler #1");
-      localStorage.removeItem("deliveryDetails");
-      localStorage.removeItem("shipmentMethod");
-      localStorage.removeItem("paymentMethod");
-      localStorage.removeItem("dropshipper");
-      this.buttonDeliveryFlag = true;
-      this.buttonPaymentFlag = false;
-      return;
+      console.log("buttonBackHandler worked");
+      if (this.currentStep === 1) {
+        console.log("currentStep = 1");
+        return;
+      } else if (this.currentStep === 2) {
+        console.log("currentStep = 2");
+        this.$store.commit("landing/SET_CURRENT_STEP", 1);
+        this.buttonDeliveryFlag = true;
+        this.buttonPaymentFlag = false;
+        return;
+      } else if (this.currentStep === 3) {
+        console.log("currentStep = 3");
+        this.$store.commit("landing/SET_CURRENT_STEP", 2);
+        this.buttonPaymentFlag = true;
+        return;
+      } else {
+        return;
+      }
     });
     EventBus.$on("buttonFlagHandler", type => {
-      console.log("buttonFlagHandler #1");
-      console.log("cek type:", type);
       if (type === "delivery-details") {
         this.buttonDeliveryFlag = false;
         this.buttonPaymentFlag = true;
@@ -80,7 +88,8 @@ export default {
     ...mapState("landing", [
       "deliveryDetails",
       "shipmentMethod",
-      "paymentMethod"
+      "paymentMethod",
+      "currentStep"
     ])
   },
   components: {

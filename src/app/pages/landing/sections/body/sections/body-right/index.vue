@@ -93,13 +93,6 @@ export default {
     ])
   },
   created() {
-    EventBus.$on("buttonBackHandler", () => {
-      console.log("buttonBackHandler #2");
-      this.$store.commit("landing/SET_CURRENT_STEP", 1);
-      this.shipmentFlag = false;
-      this.paymentFlag = false;
-      return;
-    });
     EventBus.$on("summary-payment", item => {
       console.log("summary-payment worked");
       this.paymentFlag = true;

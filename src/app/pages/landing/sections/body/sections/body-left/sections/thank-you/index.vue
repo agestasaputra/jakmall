@@ -4,7 +4,8 @@
       <h1>Thank you</h1>
     </div>
     <div class="text-order-id">
-      <h3>Order ID: XXKYB</h3>
+      <!-- <h3>Order ID: XXKYB</h3> -->
+      <h3>Order ID: {{generateCode(5)}}</h3>
     </div>
     <div class="text-desc">
       <p>Your order will be delivered today with {{shipments[shipmentMethod].name}}</p>
@@ -12,7 +13,6 @@
     <div class="text-navigation">
       <i class="fa fa-arrow-left" />
       <h4 class="text-navigation-desc" v-on:click="goToHompageHandler">Go to hompage</h4>
-      <!-- <h4 class="text-navigation-desc" v-on:click="buttonBackHandler">Go to hompage</h4> -->
     </div>
   </Fragment>
 </template>
@@ -20,7 +20,7 @@
 <script>
 import { Fragment } from "vue-fragment";
 import { mapState } from "vuex";
-import { EventBus } from "@/event-bus";
+// import { EventBus } from "@/event-bus";
 
 export default {
   name: "app-thank-you",
@@ -33,23 +33,20 @@ export default {
   },
   methods: {
     goToHompageHandler() {
-      EventBus.$emit("buttonBackHandler", "thank-you");
+      location.reload();
+      localStorage.removeItem("deliveryDetails");
       return;
     },
-    buttonBackHandler() {
-      console.log("buttonBackHandler invoked!");
-      this.$store.commit("landing/SET_CURRENT_STEP", 1);
-      this.$store.commit("landing/SET_SHIPMENT_METHOD", { id: null, price: 0 });
-      this.$store.commit("landing/SET_PAYMENT_METHOD", {
-        id: null,
-        balance: 0
-      });
-      this.$store.commit("landing/SET_DROPSHIPPER", false);
-      localStorage.removeItem("deliveryDetails");
-      localStorage.removeItem("shipmentMethod");
-      localStorage.removeItem("paymentMethod");
-      localStorage.removeItem("dropshipper");
-      return;
+    generateCode(length) {
+      var result = "";
+      var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0";
+      var charactersLength = characters.length;
+      for (var i = 0; i < length; i++) {
+        result += characters.charAt(
+          Math.floor(Math.random() * charactersLength)
+        );
+      }
+      return result;
     }
   }
 };
